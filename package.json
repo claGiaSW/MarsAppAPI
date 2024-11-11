@@ -11,5 +11,12 @@
   },
   "devDependencies": {
     "tsx": "^4.19.2"
-  }
+  },
+  "name": "marsappapi",
+  "version": "1.0.0",
+  "description": "Run project with `npm run start`",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
