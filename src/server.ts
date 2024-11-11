@@ -11,7 +11,7 @@ app.get("/", (req: any, res: any) => {
     B) /rover/photos = photos from that rover`)
 });
 
-app.use("/rover", roverRouter)
+app.use("/rover", roverRouter);
 
 app.listen(port, () => {
   console.log(`Test backend is running on port ${port}`);
