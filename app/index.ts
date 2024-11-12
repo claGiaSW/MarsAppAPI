@@ -6,8 +6,8 @@ const app = express();
 app.get("/", (req: any, res: any) => {
   res.send(`Hello space traveller!
     What are you exploring today?
-    A) /rover = all info
-    B) /rover/photos = photos from that rover`)
+    A) /rovers = all rovers' info
+    B) /rovers/[your preferred rover's name]/photos = photos from that rover`)
 });
 
 app.use("/rovers", roverRouter);

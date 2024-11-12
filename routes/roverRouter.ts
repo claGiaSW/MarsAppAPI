@@ -72,9 +72,7 @@ roverRouter.get('/:roverName/photos', (req: any, res: any) => {
   
   const { roverName } = req.params;
 
-  const { camera, sol, page } = req.query;
-
-  console.log(`rover: ${roverName}, camera: ${camera}, sol: ${sol}`);
+  const { camera, sol, page, paginationStart, paginationEnd } = req.query;
   
   axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos`, {
     params: {
@@ -87,10 +85,12 @@ roverRouter.get('/:roverName/photos', (req: any, res: any) => {
     .then(response => {
       const photos: Photo[] = response.data.photos;
       const urls: string[] = [];
+
       photos.forEach(photo => {
         urls.push(photo.img_src);
       });
-      res.send(urls);
+
+      res.send(urls.slice(paginationStart - 1, paginationEnd));
     })
     .catch(error => {
       console.error(error);
