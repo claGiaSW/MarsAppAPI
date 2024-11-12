@@ -18,6 +18,13 @@ enum Cameras {
   MINITES = "MINITES"
 }
 
+enum Rovers {
+  CURIOSITY = "Curiosity",
+  SPIRIT = "Spirit",
+  OPPORTUNITY = "Opportunity",
+  PERSEVERANCE = "Perseverance"
+}
+
 interface Camera {
   id?: number;
   name: string;
@@ -57,8 +64,16 @@ roverRouter.get('/', (req: any, res: any) => {
     })
 });
 
-roverRouter.get('/photos', (req: any, res: any) => {
-  axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=${Cameras.NAVCAM}&api_key=${apiKey}`)
+roverRouter.get('/:rovername/photos/:camera?', (req: any, res: any) => {
+  
+  const { rovername, camera } = req.params;
+
+  console.log(`rover: ${rovername}, camera: ${camera}`);
+
+  const nasaUrl = camera ? `https://api.nasa.gov/mars-photos/api/v1/rovers/${rovername}/photos?sol=1000&camera=${camera}&api_key=${apiKey}`
+  : `https://api.nasa.gov/mars-photos/api/v1/rovers/${rovername}/photos?sol=1000&api_key=${apiKey}`;
+  
+  axios.get(nasaUrl)
     .then(response => {
       const photos: Photo[] = response.data.photos;
       const urls: string[] = [];
