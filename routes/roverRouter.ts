@@ -54,7 +54,11 @@ interface Photo {
 }
 
 roverRouter.get('/', (req: any, res: any) => {
-  axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers?api_key=${apiKey}`)
+  axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers`, {
+    params: {
+      api_key: apiKey
+    }
+  })
     .then(response => {
       res.send(response.data);
     })
@@ -68,14 +72,18 @@ roverRouter.get('/:roverName/photos', (req: any, res: any) => {
   
   const { roverName } = req.params;
 
-  const { camera } = req.query;
+  const { camera, sol, page } = req.query;
 
-  console.log(`rover: ${roverName}, camera: ${camera}`);
-
-  const nasaUrl = camera ? `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?sol=1000&camera=${camera}&api_key=${apiKey}`
-  : `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?sol=1000&api_key=${apiKey}`;
+  console.log(`rover: ${roverName}, camera: ${camera}, sol: ${sol}`);
   
-  axios.get(nasaUrl)
+  axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos`, {
+    params: {
+      api_key: apiKey,
+      camera: camera,
+      page: page | 1,
+      sol: sol | 1000
+    }
+  })
     .then(response => {
       const photos: Photo[] = response.data.photos;
       const urls: string[] = [];
