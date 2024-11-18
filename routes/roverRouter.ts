@@ -11,7 +11,7 @@ enum Cameras {
   RHAZ = "RHAZ",
   MAST = "MAST",
   CHEMCAM = "CHEMCAM",
-  MAHLI = "MAHLI = 5",
+  MAHLI = "MAHLI",
   MARDI = "MARDI",
   NAVCAM = "NAVCAM",
   PANCAM = "PANCAM",
@@ -78,8 +78,8 @@ roverRouter.get('/:roverName/photos', (req: any, res: any) => {
     params: {
       api_key: apiKey,
       camera: camera,
-      page: page | 1,
-      sol: sol | 1000
+      page: page || 1,
+      sol: sol || 1000
     }
   })
     .then(response => {
