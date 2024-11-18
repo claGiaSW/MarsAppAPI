@@ -2,6 +2,7 @@
   "dependencies": {
     "@types/express": "^5.0.0",
     "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2"
@@ -11,5 +12,12 @@
   },
   "devDependencies": {
     "tsx": "^4.19.2"
-  }
+  },
+  "name": "marsappapi",
+  "version": "1.0.0",
+  "description": "Run project with `npm run start`",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
